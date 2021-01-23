@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Description;
 import org.springframework.context.support.ResourceBundleMessageSource;
 
 @Configuration
-public class ThymeleafCongiguration {
+public class CoreConfiguration {
     @Bean
     @Description("Spring Message Resolver")
     public ResourceBundleMessageSource messageSource() {
