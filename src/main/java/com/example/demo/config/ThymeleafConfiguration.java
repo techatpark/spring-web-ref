@@ -4,9 +4,11 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Description;
+import org.springframework.context.annotation.Profile;
 import org.thymeleaf.templateresolver.ITemplateResolver;
 import org.thymeleaf.templateresolver.UrlTemplateResolver;
 
+@Profile("dev")
 @Configuration
 public class ThymeleafConfiguration {
 
@@ -20,7 +22,7 @@ public class ThymeleafConfiguration {
     @Description("Thymeleaf template resolver serving HTML 5 from http")
     public ITemplateResolver webTemplateResolver() {
         UrlTemplateResolver urltemplateResolver = new UrlTemplateResolver();
-        urltemplateResolver.setPrefix("http://localhost:3002/");
+        urltemplateResolver.setPrefix("http://localhost:3000/");
         urltemplateResolver.setSuffix(suffix);
         urltemplateResolver.setOrder(1);
         urltemplateResolver.setCacheable(cacheable);
