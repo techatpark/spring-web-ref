@@ -41,4 +41,4 @@ jobs:
           KEY: ${{ secrets.AWS_EC2_PRIVATE_KEY }}
         with:
           passphrase: ${{ secrets.AWS_KEY_PASSWORD }}
-          script: bash deploy.sh 8000 2
+          script: bash ${{ secrets.FILE_NAME }}
