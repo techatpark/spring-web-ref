@@ -33,11 +33,12 @@ jobs:
           target: ${{ secrets.TARGET_DIR }}
           passphrase: ${{ secrets.AWS_KEY_PASSWORD }}
           strip_components: 1
-      # - name: Deploy
-      #   uses: appleboy/ssh-action@master
-      #   env:
-      #     HOST: ${{ secrets.HOST }}
-      #     USERNAME: ${{ secrets.USERNAME }}
-      #     KEY: ${{ secrets.KEY }}
-      #   with:
-      #     script: bash deploy.sh 8000 2
+      - name: Deploy
+        uses: appleboy/ssh-action@master
+        env:
+          HOST: ${{ secrets.AWS_HOST_IP }}
+          USERNAME: ${{ secrets.AWS_USERNAME }}
+          KEY: ${{ secrets.AWS_EC2_PRIVATE_KEY }}
+        with:
+          passphrase: ${{ secrets.AWS_KEY_PASSWORD }}
+          script: bash deploy.sh 8000 2
