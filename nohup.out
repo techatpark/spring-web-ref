@@ -1,0 +1,13 @@
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v2.4.2)
+
+2021-01-27 20:58:56.501  INFO 9366 --- [           main] com.example.demo.Application             : Starting Application v0.0.1-SNAPSHOT using Java 11.0.9.1 on BCTCL-DL340046 with PID 9366 (/home/aravind/practice/spring-web-ref/target/demo-0.0.1-SNAPSHOT.jar started by aravind in /home/aravind/practice/spring-web-ref)
+2021-01-27 20:58:56.504  INFO 9366 --- [           main] com.example.demo.Application             : No active profile set, falling back to default profiles: default
+2021-01-27 20:58:57.744  INFO 9366 --- [           main] o.s.b.web.embedded.netty.NettyWebServer  : Netty started on port 8080
+2021-01-27 20:58:57.755  INFO 9366 --- [           main] com.example.demo.Application             : Started Application in 1.718 seconds (JVM running for 2.138)
