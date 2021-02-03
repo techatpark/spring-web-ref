@@ -10,7 +10,6 @@ import org.springframework.context.annotation.Profile;
 import org.thymeleaf.templateresolver.ITemplateResolver;
 import org.thymeleaf.templateresolver.UrlTemplateResolver;
 
-@Profile("dev")
 @Configuration
 public class ThymeleafConfiguration {
 

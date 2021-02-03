@@ -1,7 +1,6 @@
 package com.example.demo.controller;
 
 import com.example.demo.model.Station;
-import com.example.demo.model.Trip;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,15 +22,6 @@ public class HomeController {
         return "index";
     }
 
-    @RequestMapping("/bus-tickets/from/{fromStation}/to/{toStation}")
-    public String busTickets(final Model model) {
-        model.addAttribute("trips"
-                , List.of(
-                        new Trip(3,"chenai to madurai","340","AcSleeper"),
-        new Trip(5,"chenai to madurai -2","340","AcSleeper")
-                ));
-        return "trips";
-    }
     /*
     * Routring ed point
     * */
