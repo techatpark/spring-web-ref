@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Profile;
 import org.thymeleaf.templateresolver.ITemplateResolver;
 import org.thymeleaf.templateresolver.UrlTemplateResolver;
 
+@Profile("Dev")
 @Configuration
 public class ThymeleafConfiguration {
 
@@ -25,7 +26,7 @@ public class ThymeleafConfiguration {
         UrlTemplateResolver urltemplateResolver = new UrlTemplateResolver();
         urltemplateResolver.setPrefix(webSuffix);
         urltemplateResolver.setSuffix(thymeleafProperties.getSuffix());
-        urltemplateResolver.setOrder(1);
+        urltemplateResolver.setOrder(2);
         urltemplateResolver.setCacheable(thymeleafProperties.isCache());
         urltemplateResolver.setCharacterEncoding(thymeleafProperties.getEncoding().name());
         return urltemplateResolver;

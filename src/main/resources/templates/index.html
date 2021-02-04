@@ -8,7 +8,25 @@
 </head>
 
 <body>
+
     <span th:text="#{welcome.message}" />
+
+    <h1>Login</h1>
+    <div class="container unauthenticated">
+        <div>
+            With GitHub: <a href="/oauth2/authorization/github">click here</a>
+        </div>
+        <div>
+            With Google: <a href="/oauth2/authorization/google">click here</a>
+        </div>
+    </div>
+    <div class="container authenticated" style="display: none">
+        Logged in as: <span id="user"></span>
+        <div>
+            <button onClick="logout()" class="btn btn-primary">Logout</button>
+        </div>
+    </div>
+
 </body>
 
 </html>

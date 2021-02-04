@@ -1,38 +1,24 @@
 package com.example.demo.controller;
 
-import com.example.demo.model.Station;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class HomeController {
-    
-    @RequestMapping("/")
-    public String index(final Model model) {
-        model.addAttribute("fromStations"
-                , List.of(
-                        new Station("CHN","Chennai"),
-                        new Station("BLR","Bengaluru"),
-                        new Station("MDU","Madurai"),
-                        new Station("CBE","Coimbatore yy")
-                ));
-        return "index";
+
+    @GetMapping(value = "/", produces = MediaType.TEXT_HTML_VALUE)
+    @ResponseBody
+    public String welcomeAsHTML() {
+        return "<html>\n" + "<header><title>Welcome</title></header>\n" +
+                "<body>\n" + "Hello world\n" + "</body>\n" + "</html>";
     }
 
-    /*
-    * Routring ed point
-    * */
-    @RequestMapping("/bus-tickets/from/{fromStation}/to/{toStation}/sheet-selection")
-    public String sheets(final Model model) {
-       ;
-        //accessing file name of the html
-        return "seat_selection";
-    }
-    @RequestMapping("/passengers-list")
-    public String passangers(final Model model) {
-        return "passengers";
+    @GetMapping("/login")
+    public String login(final Model model) {
+        return "login";
     }
 }

@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Description;
 import org.springframework.context.support.ResourceBundleMessageSource;
 
 @Configuration
-public class CoreConfiguration {
+public class I18NConfiguration {
     @Bean
     @Description("Spring Message Resolver")
     public ResourceBundleMessageSource messageSource() {
