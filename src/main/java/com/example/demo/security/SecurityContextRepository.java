@@ -22,18 +22,19 @@ public class SecurityContextRepository implements ServerSecurityContextRepositor
 	@Autowired
 	private AuthenticationManager authenticationManager;
 
+	@Autowired
+	private JWTUtil jwtUtil;
+
 	@Override
 	public Mono<Void> save(ServerWebExchange swe, SecurityContext sc) {
-		throw new UnsupportedOperationException("Not supported yet.");
+		throw new UnsupportedOperationException("sSS");
 	}
 
 	@Override
 	public Mono<SecurityContext> load(ServerWebExchange swe) {
-		ServerHttpRequest request = swe.getRequest();
-		String authHeader = request.getHeaders().getFirst(HttpHeaders.AUTHORIZATION);
+		String authToken = jwtUtil.getDigest(swe);
 
-		if (authHeader != null && authHeader.startsWith("Bearer ")) {
-			String authToken = authHeader.substring(7);
+		if (authToken != null ) {
 			Authentication auth = new UsernamePasswordAuthenticationToken(authToken, authToken);
 			return this.authenticationManager.authenticate(auth).map((authentication) -> {
 				return new SecurityContextImpl(authentication);
@@ -42,5 +43,7 @@ public class SecurityContextRepository implements ServerSecurityContextRepositor
 			return Mono.empty();
 		}
 	}
+
+
 	
 }

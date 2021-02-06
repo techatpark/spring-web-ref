@@ -28,13 +28,20 @@ public class WebSecurityConfig {
 	@Bean
 	public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity http) {
 		return http
-		.authorizeExchange()
-				.anyExchange()
-				.permitAll()
-				.and()
+				.exceptionHandling()
+				.authenticationEntryPoint((swe, e) -> {
+					return Mono.fromRunnable(() -> {
+						swe.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
+					});
+				}).accessDeniedHandler((swe, e) -> {
+					return Mono.fromRunnable(() -> {
+						swe.getResponse().setStatusCode(HttpStatus.FORBIDDEN);
+					});
+				}).and()
 				.csrf().disable()
 				.formLogin().disable()
 				.httpBasic().disable()
+				.logout().disable()
 				.authenticationManager(authenticationManager)
 				.securityContextRepository(securityContextRepository)
 				.build();

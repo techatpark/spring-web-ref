@@ -1,0 +1,50 @@
+Feebback Loop
+=============
+Exploration Activity
+
+Make change -> Build The chage -> Deploy AWS - > Login Verify
+
+45m+
+
+Does not work at times
+No way to Debug = Log => More Login in info 
+
+
+Side Effects
+============
+Cost of Infra  => AWS 
+Resource Limitation => 
+Slowdown Development => 
+Log is Only Debug = > More Log => No Cleanup => Performace + Security
+Delivery : Delayed and Inaccurate 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Root Cause
+==========
+DynamoDB => Solved 
+Lambda => AWS Lamda Tests 
+API Security and Access Issues =>
+
+Easy Wins = > Cleaner, Safer, Cheaper
+

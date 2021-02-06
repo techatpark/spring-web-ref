@@ -16,11 +16,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.Cache;
 import org.springframework.cache.CacheManager;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Component;
+import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
 /**
@@ -54,13 +57,17 @@ public class JWTUtil {
 		return Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token).getBody();
 	}
 
+	public void logout(ServerWebExchange swe) {
+		authCache.evict(getDigest(swe));
+	}
+
 	public Mono<Authentication> getAuthentication(String digest) {
 		Cache.ValueWrapper valueWrapper = authCache.get(digest);
-		String authToken = (String) valueWrapper.get();
-		if(authToken == null) {
+
+		if(valueWrapper == null) {
 			return Mono.empty();
 		}
-
+		String authToken = (String) valueWrapper.get();
 			try {
 				String username = getUsernameFromToken(authToken);
 				if (!validateToken(authToken)) {
@@ -78,6 +85,16 @@ public class JWTUtil {
 			}
 
 
+	}
+
+	public String getDigest(ServerWebExchange swe) {
+		ServerHttpRequest request = swe.getRequest();
+		String authHeader = request.getHeaders().getFirst(HttpHeaders.AUTHORIZATION);
+
+		if (authHeader != null && authHeader.startsWith("Bearer ")) {
+			return authHeader.substring(7);
+		}
+		return null;
 	}
 	
 	public String getUsernameFromToken(String token) {
