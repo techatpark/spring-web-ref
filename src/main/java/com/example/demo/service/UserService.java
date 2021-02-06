@@ -8,29 +8,37 @@ import java.util.Map;
 
 import javax.annotation.PostConstruct;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
-/**
- *
- * @author ard333
- */
 @Service
 public class UserService {
+
+
+	private final PasswordEncoder passwordEncoder;
 	
 	// this is just an example, you can load the user from the database from the repository
 
 	private Map<String, User> data;
-	
+
+	public UserService(PasswordEncoder passwordEncoder) {
+		this.passwordEncoder = passwordEncoder;
+	}
+
 	@PostConstruct
 	public void init(){
 		data = new HashMap<>();
 		
 		//username:passwowrd -> user:user
-		data.put("user", new User("user", "cBrlgyL2GI2GINuLUUwgojITuIufFycpLG4490dhGtY=", true, Arrays.asList(Role.ROLE_USER)));
+		data.put("user", new User("user"
+				, passwordEncoder.encode("user")
+				, true, Arrays.asList(Role.ROLE_USER)));
 
 		//username:passwowrd -> admin:admin
-		data.put("admin", new User("admin", "dQNjUIMorJb8Ubj2+wVGYp6eAeYkdekqAcnYp+aRq5w=", true, Arrays.asList(Role.ROLE_ADMIN)));
+		data.put("admin", new User("admin"
+				, passwordEncoder.encode("user")
+				, true, Arrays.asList(Role.ROLE_ADMIN)));
 	}
 	
 	public Mono<User> findByUsername(String username) {

@@ -8,26 +8,23 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
 
-/**
- *
- * @author ardiansyah
- */
 @RestController
-public class ResourceREST {
+@RequestMapping("/{tenantCode}/api/resource")
+public class ResourceAPIController {
 	
-	@RequestMapping(value = "/resource/user", method = RequestMethod.GET)
+	@RequestMapping(value = "/user", method = RequestMethod.GET)
 	@PreAuthorize("hasRole('USER')")
 	public Mono<ResponseEntity<?>> user() {
 		return Mono.just(ResponseEntity.ok(new Message("Content for user")));
 	}
 	
-	@RequestMapping(value = "/resource/admin", method = RequestMethod.GET)
+	@RequestMapping(value = "/admin", method = RequestMethod.GET)
 	@PreAuthorize("hasRole('ADMIN')")
 	public Mono<ResponseEntity<?>> admin() {
 		return Mono.just(ResponseEntity.ok(new Message("Content for admin")));
 	}
 	
-	@RequestMapping(value = "/resource/user-or-admin", method = RequestMethod.GET)
+	@RequestMapping(value = "/user-or-admin", method = RequestMethod.GET)
 	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	public Mono<ResponseEntity<?>> userOrAdmin() {
 		return Mono.just(ResponseEntity.ok(new Message("Content for user or admin")));

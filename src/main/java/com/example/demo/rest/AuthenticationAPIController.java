@@ -12,12 +12,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
-/**
- *
- * @author ard333
- */
 @RestController
-public class AuthenticationREST {
+public class AuthenticationAPIController {
 
 	@Autowired
 	private JWTUtil jwtUtil;

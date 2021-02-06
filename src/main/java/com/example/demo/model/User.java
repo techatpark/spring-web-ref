@@ -15,11 +15,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-/**
- *
- * @author ard333
- */
-@ToString @AllArgsConstructor @NoArgsConstructor
+@ToString
+@AllArgsConstructor
+@NoArgsConstructor
 public class User implements UserDetails {
 	
 	private static final long serialVersionUID = 1L;
