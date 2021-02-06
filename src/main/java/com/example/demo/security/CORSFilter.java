@@ -9,8 +9,7 @@ import org.springframework.web.reactive.config.WebFluxConfigurer;
  *
  * @author ard333
  */
-@Configuration
-@EnableWebFlux
+
 public class CORSFilter implements WebFluxConfigurer {
 
 	@Override

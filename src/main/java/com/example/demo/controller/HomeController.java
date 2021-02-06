@@ -14,17 +14,9 @@ import java.io.StringWriter;
 public class HomeController {
 
 
-    private final TemplateEngine templateEngine;
-
-    public HomeController(TemplateEngine templateEngine) {
-        this.templateEngine = templateEngine;
-    }
-
-    @GetMapping(value = "/"
-            , produces = MediaType.TEXT_HTML_VALUE)
-    @ResponseBody
+    @GetMapping
     public String welcomeAsHTML(final Model model) {
-        return templateEngine.process("index",new Context());
+        return "index";
     }
 
     @GetMapping("/login")
