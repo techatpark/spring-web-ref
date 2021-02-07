@@ -34,7 +34,7 @@ public class AuthenticationAPIController {
 				+ ApplicationConstants.WORD_SEPARATOR + tenant.getCode())
 				.map((userDetails) -> {
 			if (passwordEncoder.encode(ar.getPassword()).equals(userDetails.getPassword())) {
-				return ResponseEntity.ok(new AuthResponse(jwtUtil.generateToken(userDetails)));
+				return ResponseEntity.ok(new AuthResponse(jwtUtil.generateToken(userDetails, tenant.getCode())));
 			} else {
 				return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
 			}

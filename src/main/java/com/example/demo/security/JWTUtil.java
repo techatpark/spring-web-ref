@@ -1,5 +1,6 @@
 package com.example.demo.security;
 
+import com.example.demo.constants.ApplicationConstants;
 import com.example.demo.model.User;
 import java.security.Key;
 import java.security.MessageDigest;
@@ -110,7 +111,7 @@ public class JWTUtil {
 		return expiration.before(new Date());
 	}
 	
-	public String generateToken(User user) {
+	public String generateToken(User user,String tenentCode) {
 
 		Map<String, Object> claims = new HashMap<>();
 		claims.put("role", user.getRoles());
@@ -118,7 +119,7 @@ public class JWTUtil {
 
 		String digest = UUID.randomUUID().toString();
 
-		authCache.put(digest,jwtToken);
+		authCache.put(digest+ ApplicationConstants.WORD_SEPARATOR + tenentCode,jwtToken);
 		return digest;
 	}
 

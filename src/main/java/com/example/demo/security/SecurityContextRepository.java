@@ -1,5 +1,7 @@
 package com.example.demo.security;
 
+import com.example.demo.constants.ApplicationConstants;
+import com.example.demo.service.TenantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.server.reactive.ServerHttpRequest;
@@ -23,6 +25,9 @@ public class SecurityContextRepository implements ServerSecurityContextRepositor
 	private AuthenticationManager authenticationManager;
 
 	@Autowired
+	private TenantService tenantService;
+
+	@Autowired
 	private JWTUtil jwtUtil;
 
 	@Override
@@ -35,7 +40,7 @@ public class SecurityContextRepository implements ServerSecurityContextRepositor
 		String authToken = jwtUtil.getDigest(swe);
 
 		if (authToken != null ) {
-			Authentication auth = new UsernamePasswordAuthenticationToken(authToken, authToken);
+			Authentication auth = new UsernamePasswordAuthenticationToken(authToken,authToken+ ApplicationConstants.WORD_SEPARATOR + tenantService.getTenantCode(swe));
 			return this.authenticationManager.authenticate(auth).map((authentication) -> {
 				return new SecurityContextImpl(authentication);
 			});

@@ -2,6 +2,7 @@ package com.example.demo.service;
 
 import com.example.demo.model.Tenant;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
 import javax.annotation.PostConstruct;
@@ -35,6 +36,12 @@ public class TenantService {
 		} else {
 			return Mono.empty();
 		}
+	}
+
+	public String getTenantCode(ServerWebExchange serverWebExchange) {
+		String path = serverWebExchange.getRequest().getPath().value();
+		int secondIndexofSlash = path.indexOf("/",2);
+		return (secondIndexofSlash == -1) ? path.substring(1) : path.substring(1,path.indexOf("/",2));
 	}
 	
 }
