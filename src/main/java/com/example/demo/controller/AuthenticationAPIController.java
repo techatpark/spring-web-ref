@@ -1,5 +1,7 @@
-package com.example.demo.rest;
+package com.example.demo.controller;
 
+import com.example.demo.constants.ApplicationConstants;
+import com.example.demo.model.Tenant;
 import com.example.demo.security.JWTUtil;
 import com.example.demo.security.PBKDF2Encoder;
 import com.example.demo.security.model.AuthRequest;
@@ -13,6 +15,7 @@ import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
 @RestController
+@RequestMapping("/{tenantCode}")
 public class AuthenticationAPIController {
 
 	@Autowired
@@ -25,8 +28,11 @@ public class AuthenticationAPIController {
 	private UserService userService;
 
 	@RequestMapping(value = "/api/login", method = RequestMethod.POST)
-	public Mono<ResponseEntity<?>> login(@RequestBody AuthRequest ar) {
-		return userService.findByUsername(ar.getUsername()).map((userDetails) -> {
+	public Mono<ResponseEntity<?>> login(final Tenant tenant,
+										 @RequestBody final AuthRequest ar) {
+		return userService.findByUsername(ar.getUsername()
+				+ ApplicationConstants.WORD_SEPARATOR + tenant.getCode())
+				.map((userDetails) -> {
 			if (passwordEncoder.encode(ar.getPassword()).equals(userDetails.getPassword())) {
 				return ResponseEntity.ok(new AuthResponse(jwtUtil.generateToken(userDetails)));
 			} else {
@@ -36,7 +42,8 @@ public class AuthenticationAPIController {
 	}
 
 	@RequestMapping(value = "/api/logout", method = RequestMethod.POST)
-	public Mono<ResponseEntity<?>> logout(ServerWebExchange exchange) {
+	public Mono<ResponseEntity<?>> logout(final Tenant tenant
+			,final ServerWebExchange exchange) {
 		jwtUtil.logout(exchange);
 		return Mono.just(ResponseEntity.status(HttpStatus.OK).build());
 	}

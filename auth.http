@@ -1,23 +1,30 @@
 @baseUrl = http://localhost:8080
 
 # @name login
-POST {{baseUrl}}/api/login HTTP/1.1
+POST {{baseUrl}}/tenant1/api/login HTTP/1.1
 Content-Type: application/json
 
 {
     "username":"user",
-    "password":"user"
+    "password":"tenant1"
 }
 
 ###
 
 @authToken = {{login.response.body.$.token}}
 
-GET {{baseUrl}}/resource/user HTTP/1.1
+GET {{baseUrl}}/tenant1/api/resource/user HTTP/1.1
+Authorization: Bearer {{authToken}}
+
+###
+
+@authToken = {{login.response.body.$.token}}
+
+GET {{baseUrl}}/tenant2/api/resource/user HTTP/1.1
 Authorization: Bearer {{authToken}}
 
 
 ###
-POST {{baseUrl}}/api/logout HTTP/1.1
+POST {{baseUrl}}/tenant1/api/logout HTTP/1.1
 Content-Type: application/json
 Authorization: Bearer {{authToken}}

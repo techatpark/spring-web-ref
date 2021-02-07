@@ -1,6 +1,7 @@
-package com.example.demo.rest;
+package com.example.demo.controller;
 
 import com.example.demo.model.Message;
+import com.example.demo.model.Tenant;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,19 +15,19 @@ public class ResourceAPIController {
 	
 	@RequestMapping(value = "/user", method = RequestMethod.GET)
 	@PreAuthorize("hasRole('USER')")
-	public Mono<ResponseEntity<?>> user() {
+	public Mono<ResponseEntity<?>> user(final Tenant tenant) {
 		return Mono.just(ResponseEntity.ok(new Message("Content for user")));
 	}
 	
 	@RequestMapping(value = "/admin", method = RequestMethod.GET)
 	@PreAuthorize("hasRole('ADMIN')")
-	public Mono<ResponseEntity<?>> admin() {
+	public Mono<ResponseEntity<?>> admin(final Tenant tenant) {
 		return Mono.just(ResponseEntity.ok(new Message("Content for admin")));
 	}
 	
 	@RequestMapping(value = "/user-or-admin", method = RequestMethod.GET)
 	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
-	public Mono<ResponseEntity<?>> userOrAdmin() {
+	public Mono<ResponseEntity<?>> userOrAdmin(final Tenant tenant) {
 		return Mono.just(ResponseEntity.ok(new Message("Content for user or admin")));
 	}
 }

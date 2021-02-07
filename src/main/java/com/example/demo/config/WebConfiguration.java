@@ -17,7 +17,5 @@ public class WebConfiguration implements WebFluxConfigurer {
     @Override
     public void configureArgumentResolvers(ArgumentResolverConfigurer configurer) {
         configurer.addCustomResolver(tenantResolver);
-
-
     }
 }

@@ -27,7 +27,9 @@ public class TenantResolver implements HandlerMethodArgumentResolver {
     public Mono resolveArgument(MethodParameter methodParameter
             , BindingContext bindingContext
             , ServerWebExchange serverWebExchange) {
-        String tenantCode = serverWebExchange.getRequest().getPath().value().replaceAll("/","");
+        String path = serverWebExchange.getRequest().getPath().value();
+        int secondIndexofSlash = path.indexOf("/",2);
+        String tenantCode = (secondIndexofSlash == -1) ? path.substring(1) : path.substring(1,path.indexOf("/",2));
         return tenantService.findByCode(tenantCode);
     }
 }
