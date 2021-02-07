@@ -44,7 +44,7 @@ public class AuthenticationAPIController {
 	@RequestMapping(value = "/api/logout", method = RequestMethod.POST)
 	public Mono<ResponseEntity<?>> logout(final Tenant tenant
 			,final ServerWebExchange exchange) {
-		jwtUtil.logout(exchange);
+		jwtUtil.logout(exchange,tenant.getCode());
 		return Mono.just(ResponseEntity.status(HttpStatus.OK).build());
 	}
 

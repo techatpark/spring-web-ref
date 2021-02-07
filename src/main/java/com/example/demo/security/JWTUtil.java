@@ -58,8 +58,8 @@ public class JWTUtil {
 		return Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token).getBody();
 	}
 
-	public void logout(ServerWebExchange swe) {
-		authCache.evict(getDigest(swe));
+	public void logout(ServerWebExchange swe,String tenantCode) {
+		authCache.evict(getDigest(swe)+ApplicationConstants.WORD_SEPARATOR+tenantCode);
 	}
 
 	public Mono<Authentication> getAuthentication(String digest) {
