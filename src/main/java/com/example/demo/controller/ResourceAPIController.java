@@ -16,7 +16,7 @@ public class ResourceAPIController {
 	@RequestMapping(value = "/user", method = RequestMethod.GET)
 	@PreAuthorize("hasRole('USER')")
 	public Mono<ResponseEntity<?>> user(final Tenant tenant) {
-		return Mono.just(ResponseEntity.ok(new Message("Content for user")));
+		return Mono.just(ResponseEntity.ok(new Message("Content for user "+tenant.getCode())));
 	}
 	
 	@RequestMapping(value = "/admin", method = RequestMethod.GET)
