@@ -9,29 +9,53 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
 
-@ToString
-@AllArgsConstructor
-@NoArgsConstructor
 public class User implements UserDetails {
 	
 	private static final long serialVersionUID = 1L;
 
 	private String username;
-	
 	private String password;
-	
-	@Getter @Setter
 	private Boolean enabled;
-	
-	@Getter @Setter
 	private List<Role> roles;
-	
+
+	@Override
+	public String toString() {
+		return "User{" +
+				"username='" + username + '\'' +
+				", password='" + password + '\'' +
+				", enabled=" + enabled +
+				", roles=" + roles +
+				'}';
+	}
+
+	public User(String username, String password, Boolean enabled, List<Role> roles) {
+		this.username = username;
+		this.password = password;
+		this.enabled = enabled;
+		this.roles = roles;
+	}
+
+	public static long getSerialVersionUID() {
+		return serialVersionUID;
+	}
+
+	public Boolean getEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(Boolean enabled) {
+		this.enabled = enabled;
+	}
+
+	public List<Role> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(List<Role> roles) {
+		this.roles = roles;
+	}
+
 	@Override
 	public String getUsername() {
 		return username;
