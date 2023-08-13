@@ -1,5 +1,6 @@
 package com.example;
 
+import io.unlogged.Unlogged;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
@@ -27,6 +28,7 @@ public class Application {
      *
      * @param args the args
      */
+    @Unlogged
     public static void main(final String[] args) {
         SpringApplication.run(Application.class, args);
     }
